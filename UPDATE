@@ -4,28 +4,32 @@
 
 if [ -d "./luci-app-dockerman" ]; then
   cd luci-app-dockerman
-  echo 'Updating luci-app-dockerman source ...'
+  echo '# Updating luci-app-dockerman source ...'
   git pull
   cd ..
 else
-  echo 'Downloading luci-app-dockerman source ...'
+  echo '# Cloning luci-app-dockerman source ...'
   git clone https://github.com/lisaac/luci-app-dockerman
 fi
 
 if [ -e "README.md" ]; then
   diff README.md ./luci-app-dockerman/README.md > /dev/null
   if [ $? = 1 ]; then
+    echo '# Updating README.md file'
     cp -f ./luci-app-dockerman/README.md .
   fi
 else
+  echo '# Copying README.md file'
   cp ./luci-app-dockerman/README.md .
 fi
 
 if [ -e "LICENSE" ]; then
   diff LICENSE ./luci-app-dockerman/LICENSE > /dev/null
   if [ $? = 1 ]; then
+    echo '# Updating LICENSE file'
     cp -f ./luci-app-dockerman/LICENSE .
   fi
 else
+  echo '# Copying LICENSE file'
   cp ./luci-app-dockerman/LICENSE .
 fi
